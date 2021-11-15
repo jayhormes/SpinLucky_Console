@@ -90,8 +90,8 @@
 			var award_4_weight;
 			var award_5_weight;
 			var award_6_weight;
-			MyDatabase.collection("SpinAwards").get().then((onSnapshot) => {
-				onSnapshot.forEach((doc) => {
+			MyDatabase.collection("SpinAwards").onSnapshot(querySnapshot => {
+				querySnapshot.forEach((doc) => {
 					//console.log(`${doc.id} => ${doc.data().description}`);
 					if (doc.id == '頭獎') {
 						award_1_description = doc.data().description;
