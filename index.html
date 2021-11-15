@@ -39,12 +39,12 @@
 				document.getElementById("award_4_name").innerHTML=award_4_description;
 				document.getElementById("award_5_name").innerHTML=award_5_description;
 				document.getElementById("award_6_name").innerHTML=award_6_description;
-				document.getElementById("award_1_inputbox").value=award_1_storage;
-				document.getElementById("award_2_inputbox").value=award_2_storage;
-				document.getElementById("award_3_inputbox").value=award_3_storage;
-				document.getElementById("award_4_inputbox").value=award_4_storage;
-				document.getElementById("award_5_inputbox").value=award_5_storage;
-				document.getElementById("award_6_inputbox").value=award_6_storage;
+				document.getElementById("award_1_storage_inputbox").value=award_1_storage;
+				document.getElementById("award_2_storage_inputbox").value=award_2_storage;
+				document.getElementById("award_3_storage_inputbox").value=award_3_storage;
+				document.getElementById("award_4_storage_inputbox").value=award_4_storage;
+				document.getElementById("award_5_storage_inputbox").value=award_5_storage;
+				document.getElementById("award_6_storage_inputbox").value=award_6_storage;
 			}
 		</script>
 		<script>
@@ -60,8 +60,8 @@
 			var award_4_storage;
 			var award_5_storage;
 			var award_6_storage;
-			MyDatabase.collection("SpinAwards").get().then((querySnapshot) => {
-				querySnapshot.forEach((doc) => {
+			MyDatabase.collection("SpinAwards").get().then((onSnapshot) => {
+				onSnapshot.forEach((doc) => {
 					//console.log(`${doc.id} => ${doc.data().description}`);
 					if (doc.id == '頭獎') {
 						award_1_description = doc.data().description;
@@ -92,12 +92,31 @@
 			});
 		</script>
 		<script>
-			function UpdateTest(){
-				MyDatabase.collection("SpinAwards").get().then((querySnapshot) => {
-					querySnapshot.forEach((doc) => {
-						console.log(`${doc.id} => ${doc.data().description}`);
-					});
-				});
+			function UpdateStorage(){
+				var award_1_storage_update = document.getElementById("award_1_storage_inputbox").value;
+				var award_2_storage_update = document.getElementById("award_2_storage_inputbox").value;
+				var award_3_storage_update = document.getElementById("award_3_storage_inputbox").value;
+				var award_4_storage_update = document.getElementById("award_4_storage_inputbox").value;
+				var award_5_storage_update = document.getElementById("award_5_storage_inputbox").value;
+				var award_6_storage_update = document.getElementById("award_6_storage_inputbox").value;
+				MyDatabase.collection("SpinAwards").doc("頭獎").update({
+					storage: award_1_storage_update
+				})
+				MyDatabase.collection("SpinAwards").doc("二獎").update({
+					storage: award_2_storage_update
+				})
+				MyDatabase.collection("SpinAwards").doc("三獎").update({
+					storage: award_3_storage_update
+				})
+				MyDatabase.collection("SpinAwards").doc("四獎").update({
+					storage: award_4_storage_update
+				})
+				MyDatabase.collection("SpinAwards").doc("五獎").update({
+					storage: award_5_storage_update
+				})
+				MyDatabase.collection("SpinAwards").doc("銘謝惠顧").update({
+					storage: award_6_storage_update
+				})
 			}
 		</script>		
 
@@ -135,23 +154,23 @@
 								<!--<span class="image main"><img src="images/pic01.jpg" alt="" /></span>-->
 								<h2>獎項一</h2>
 								<p id="award_1_name"></p>
-								<p><input type="text" id="award_1_inputbox" size="10"></p>
+								<p><input type="text" id="award_1_storage_inputbox" size="10" inputmode="numeric"></p>
 								<h2>獎項二</h2>
 								<p id="award_2_name"></p>
-								<p><input type="text" id="award_2_inputbox" size="10"></p>
+								<p><input type="text" id="award_2_storage_inputbox" size="10" inputmode="numeric"></p>
 								<h2>獎項三</h2>
 								<p id="award_3_name"></p>
-								<p><input type="text" id="award_3_inputbox" size="10"></p>
+								<p><input type="text" id="award_3_storage_inputbox" size="10" inputmode="numeric"></p>
 								<h2>獎項四</h2>
 								<p id="award_4_name"></p>
-								<p><input type="text" id="award_4_inputbox" size="10"></p>
+								<p><input type="text" id="award_4_storage_inputbox" size="10" inputmode="numeric"></p>
 								<h2>獎項五</h2>
 								<p id="award_5_name"></p>
-								<p><input type="text" id="award_5_inputbox" size="10"></p>
+								<p><input type="text" id="award_5_storage_inputbox" size="10" inputmode="numeric"></p>
 								<h2>獎項六</h2>
 								<p id="award_6_name"></p>
-								<p><input type="text" id="award_6_inputbox" size="10"></p>
-								<p><input type="button" value="Update" onclick="UpdateTest()"></p>
+								<p><input type="text" id="award_6_storage_inputbox" size="10" inputmode="numeric"></p>
+								<p><input type="button" value="Update" onclick="UpdateStorage()"></p>
 							</article>
 
 						<!-- rate -->
