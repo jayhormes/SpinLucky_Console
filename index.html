@@ -211,6 +211,12 @@
 				award_4_rate_after_count = percentage(award_4_rate_weight_update, total_weight);
 				award_5_rate_after_count = percentage(award_5_rate_weight_update, total_weight);
 				award_6_rate_after_count = percentage(award_6_rate_weight_update, total_weight);
+
+				var remain_rate = 100 - (award_1_rate_after_count + award_2_rate_after_count + award_3_rate_after_count + award_4_rate_after_count + award_5_rate_after_count + award_6_rate_after_count);
+				if (remain_rate > 0) {
+					award_6_rate_after_count = award_6_rate_after_count + remain_rate;
+				}		
+						
 				ChangeRateString();
 			}
 		</script>
