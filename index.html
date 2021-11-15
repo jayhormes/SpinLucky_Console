@@ -131,6 +131,7 @@
 					}
 				});
 				ChangeString();
+				CountRate();
 			});
 		</script>
 		<script>
@@ -184,15 +185,24 @@
 			}
 		</script>					
 		<script>
-			function CountRate(){
-				var award_1_rate_weight_update = Number(document.getElementById("award_1_rate_inputbox").value);
-				var award_2_rate_weight_update = Number(document.getElementById("award_2_rate_inputbox").value);
-				var award_3_rate_weight_update = Number(document.getElementById("award_3_rate_inputbox").value);
-				var award_4_rate_weight_update = Number(document.getElementById("award_4_rate_inputbox").value);
-				var award_5_rate_weight_update = Number(document.getElementById("award_5_rate_inputbox").value);
-				var award_6_rate_weight_update = Number(document.getElementById("award_6_rate_inputbox").value);
+			var award_1_rate_weight_update;
+			var award_1_rate_weight_update;
+			var award_1_rate_weight_update;
+			var award_1_rate_weight_update;
+			var award_1_rate_weight_update;
+			var award_1_rate_weight_update;
 
-				var total_weight = award_1_rate_weight_update + award_2_rate_weight_update + award_3_rate_weight_update + award_4_rate_weight_update + award_5_rate_weight_update + award_6_rate_weight_update;
+			var total_weight;
+
+			function CountRate(){
+				award_1_rate_weight_update = Number(document.getElementById("award_1_rate_inputbox").value);
+				award_2_rate_weight_update = Number(document.getElementById("award_2_rate_inputbox").value);
+				award_3_rate_weight_update = Number(document.getElementById("award_3_rate_inputbox").value);
+				award_4_rate_weight_update = Number(document.getElementById("award_4_rate_inputbox").value);
+				award_5_rate_weight_update = Number(document.getElementById("award_5_rate_inputbox").value);
+				award_6_rate_weight_update = Number(document.getElementById("award_6_rate_inputbox").value);
+
+				total_weight = award_1_rate_weight_update + award_2_rate_weight_update + award_3_rate_weight_update + award_4_rate_weight_update + award_5_rate_weight_update + award_6_rate_weight_update;
 
 				award_1_rate_after_count = percentage(award_1_rate_weight_update, total_weight);
 				award_2_rate_after_count = percentage(award_2_rate_weight_update, total_weight);
@@ -205,22 +215,6 @@
 		</script>
 		<script>
 			function UpdateRate(){
-				var award_1_rate_weight_update = Number(document.getElementById("award_1_rate_inputbox").value);
-				var award_2_rate_weight_update = Number(document.getElementById("award_2_rate_inputbox").value);
-				var award_3_rate_weight_update = Number(document.getElementById("award_3_rate_inputbox").value);
-				var award_4_rate_weight_update = Number(document.getElementById("award_4_rate_inputbox").value);
-				var award_5_rate_weight_update = Number(document.getElementById("award_5_rate_inputbox").value);
-				var award_6_rate_weight_update = Number(document.getElementById("award_6_rate_inputbox").value);
-
-				var total_weight = award_1_rate_weight_update + award_2_rate_weight_update + award_3_rate_weight_update + award_4_rate_weight_update + award_5_rate_weight_update + award_6_rate_weight_update;
-
-				award_1_rate_after_count = percentage(award_1_rate_weight_update, total_weight);
-				award_2_rate_after_count = percentage(award_2_rate_weight_update, total_weight);
-				award_3_rate_after_count = percentage(award_3_rate_weight_update, total_weight);
-				award_4_rate_after_count = percentage(award_4_rate_weight_update, total_weight);
-				award_5_rate_after_count = percentage(award_5_rate_weight_update, total_weight);
-				award_6_rate_after_count = percentage(award_6_rate_weight_update, total_weight);
-				
 				MyDatabase.collection("SpinAwards").doc("頭獎").update({
 					rate: award_1_rate_after_count,
 					weight: award_1_rate_weight_update
