@@ -32,19 +32,37 @@
 	<body class="is-preload">
 				
 		<script>
-			function ChangeInputBoxString(){
-				document.getElementById("award_1_name").innerHTML=award_1_description;
-				document.getElementById("award_2_name").innerHTML=award_2_description;
-				document.getElementById("award_3_name").innerHTML=award_3_description;
-				document.getElementById("award_4_name").innerHTML=award_4_description;
-				document.getElementById("award_5_name").innerHTML=award_5_description;
-				document.getElementById("award_6_name").innerHTML=award_6_description;
+			function ChangeString(){
+				document.getElementById("award_1_storage_name").innerHTML=award_1_description;
+				document.getElementById("award_2_storage_name").innerHTML=award_2_description;
+				document.getElementById("award_3_storage_name").innerHTML=award_3_description;
+				document.getElementById("award_4_storage_name").innerHTML=award_4_description;
+				document.getElementById("award_5_storage_name").innerHTML=award_5_description;
+				document.getElementById("award_6_storage_name").innerHTML=award_6_description;
 				document.getElementById("award_1_storage_inputbox").value=award_1_storage;
 				document.getElementById("award_2_storage_inputbox").value=award_2_storage;
 				document.getElementById("award_3_storage_inputbox").value=award_3_storage;
 				document.getElementById("award_4_storage_inputbox").value=award_4_storage;
 				document.getElementById("award_5_storage_inputbox").value=award_5_storage;
 				document.getElementById("award_6_storage_inputbox").value=award_6_storage;
+				document.getElementById("award_1_rate_name").innerHTML=award_1_description;
+				document.getElementById("award_2_rate_name").innerHTML=award_2_description;
+				document.getElementById("award_3_rate_name").innerHTML=award_3_description;
+				document.getElementById("award_4_rate_name").innerHTML=award_4_description;
+				document.getElementById("award_5_rate_name").innerHTML=award_5_description;
+				document.getElementById("award_6_rate_name").innerHTML=award_6_description;
+				document.getElementById("award_1_rate").innerHTML=award_1_rate;
+				document.getElementById("award_2_rate").innerHTML=award_2_rate;
+				document.getElementById("award_3_rate").innerHTML=award_3_rate;
+				document.getElementById("award_4_rate").innerHTML=award_4_rate;
+				document.getElementById("award_5_rate").innerHTML=award_5_rate;
+				document.getElementById("award_6_rate").innerHTML=award_6_rate;
+				document.getElementById("award_1_rate_inputbox").value=award_1_weight;
+				document.getElementById("award_2_rate_inputbox").value=award_2_weight;
+				document.getElementById("award_3_rate_inputbox").value=award_3_weight;
+				document.getElementById("award_4_rate_inputbox").value=award_4_weight;
+				document.getElementById("award_5_rate_inputbox").value=award_5_weight;
+				document.getElementById("award_6_rate_inputbox").value=award_6_weight;
 			}
 		</script>
 		<script>
@@ -60,35 +78,59 @@
 			var award_4_storage;
 			var award_5_storage;
 			var award_6_storage;
+			var award_1_rate;
+			var award_2_rate;
+			var award_3_rate;
+			var award_4_rate;
+			var award_5_rate;
+			var award_6_rate;
+			var award_1_weight;
+			var award_2_weight;
+			var award_3_weight;
+			var award_4_weight;
+			var award_5_weight;
+			var award_6_weight;
 			MyDatabase.collection("SpinAwards").get().then((onSnapshot) => {
 				onSnapshot.forEach((doc) => {
 					//console.log(`${doc.id} => ${doc.data().description}`);
 					if (doc.id == '頭獎') {
 						award_1_description = doc.data().description;
 						award_1_storage = doc.data().storage;
+						award_1_rate = doc.data().rate + " %";
+						award_1_weight = doc.data().weight;
 					}
 					if (doc.id == '二獎') {
 						award_2_description = doc.data().description;
 						award_2_storage = doc.data().storage;
+						award_2_rate = doc.data().rate + " %";
+						award_2_weight = doc.data().weight;
 					}
 					if (doc.id == '三獎') {
 						award_3_description = doc.data().description;
 						award_3_storage = doc.data().storage;
+						award_3_rate = doc.data().rate + " %";
+						award_3_weight = doc.data().weight;
 					}
 					if (doc.id == '四獎') {
 						award_4_description = doc.data().description;
 						award_4_storage = doc.data().storage;
+						award_4_rate = doc.data().rate + " %";
+						award_4_weight = doc.data().weight;
 					}
 					if (doc.id == '五獎') {
 						award_5_description = doc.data().description;
 						award_5_storage = doc.data().storage;
+						award_5_rate = doc.data().rate + " %";
+						award_5_weight = doc.data().weight;
 					}
 					if (doc.id == '銘謝惠顧') {
 						award_6_description = doc.data().description;
 						award_6_storage = doc.data().storage;
+						award_6_rate = doc.data().rate + " %";
+						award_6_weight = doc.data().weight;
 					}
 				});
-				ChangeInputBoxString();
+				ChangeString();
 			});
 		</script>
 		<script>
@@ -118,8 +160,93 @@
 					storage: award_6_storage_update
 				})
 			}
-		</script>		
+		</script>
+		<script>
+			function percentage(partialValue, totalValue) {
+				return Math.floor((partialValue / totalValue) * 100 );
+			}
+		</script>
+		<script>
+			var award_1_rate_after_count;
+			var award_2_rate_after_count;
+			var award_3_rate_after_count;
+			var award_4_rate_after_count;
+			var award_5_rate_after_count;
+			var award_6_rate_after_count;
 
+			function ChangeRateString(){
+				document.getElementById("award_1_rate_count").innerHTML=award_1_rate_after_count + " %";
+				document.getElementById("award_2_rate_count").innerHTML=award_2_rate_after_count + " %";
+				document.getElementById("award_3_rate_count").innerHTML=award_3_rate_after_count + " %";
+				document.getElementById("award_4_rate_count").innerHTML=award_4_rate_after_count + " %";
+				document.getElementById("award_5_rate_count").innerHTML=award_5_rate_after_count + " %";
+				document.getElementById("award_6_rate_count").innerHTML=award_6_rate_after_count + " %";				
+			}
+		</script>					
+		<script>
+			function CountRate(){
+				var award_1_rate_weight_update = Number(document.getElementById("award_1_rate_inputbox").value);
+				var award_2_rate_weight_update = Number(document.getElementById("award_2_rate_inputbox").value);
+				var award_3_rate_weight_update = Number(document.getElementById("award_3_rate_inputbox").value);
+				var award_4_rate_weight_update = Number(document.getElementById("award_4_rate_inputbox").value);
+				var award_5_rate_weight_update = Number(document.getElementById("award_5_rate_inputbox").value);
+				var award_6_rate_weight_update = Number(document.getElementById("award_6_rate_inputbox").value);
+
+				var total_weight = award_1_rate_weight_update + award_2_rate_weight_update + award_3_rate_weight_update + award_4_rate_weight_update + award_5_rate_weight_update + award_6_rate_weight_update;
+
+				award_1_rate_after_count = percentage(award_1_rate_weight_update, total_weight);
+				award_2_rate_after_count = percentage(award_2_rate_weight_update, total_weight);
+				award_3_rate_after_count = percentage(award_3_rate_weight_update, total_weight);
+				award_4_rate_after_count = percentage(award_4_rate_weight_update, total_weight);
+				award_5_rate_after_count = percentage(award_5_rate_weight_update, total_weight);
+				award_6_rate_after_count = percentage(award_6_rate_weight_update, total_weight);
+				ChangeRateString();
+			}
+		</script>
+		<script>
+			function UpdateRate(){
+				var award_1_rate_weight_update = Number(document.getElementById("award_1_rate_inputbox").value);
+				var award_2_rate_weight_update = Number(document.getElementById("award_2_rate_inputbox").value);
+				var award_3_rate_weight_update = Number(document.getElementById("award_3_rate_inputbox").value);
+				var award_4_rate_weight_update = Number(document.getElementById("award_4_rate_inputbox").value);
+				var award_5_rate_weight_update = Number(document.getElementById("award_5_rate_inputbox").value);
+				var award_6_rate_weight_update = Number(document.getElementById("award_6_rate_inputbox").value);
+
+				var total_weight = award_1_rate_weight_update + award_2_rate_weight_update + award_3_rate_weight_update + award_4_rate_weight_update + award_5_rate_weight_update + award_6_rate_weight_update;
+
+				award_1_rate_after_count = percentage(award_1_rate_weight_update, total_weight);
+				award_2_rate_after_count = percentage(award_2_rate_weight_update, total_weight);
+				award_3_rate_after_count = percentage(award_3_rate_weight_update, total_weight);
+				award_4_rate_after_count = percentage(award_4_rate_weight_update, total_weight);
+				award_5_rate_after_count = percentage(award_5_rate_weight_update, total_weight);
+				award_6_rate_after_count = percentage(award_6_rate_weight_update, total_weight);
+				
+				MyDatabase.collection("SpinAwards").doc("頭獎").update({
+					rate: award_1_rate_after_count,
+					weight: award_1_rate_weight_update
+				})
+				MyDatabase.collection("SpinAwards").doc("二獎").update({
+					rate: award_2_rate_after_count,
+					weight: award_2_rate_weight_update
+				})
+				MyDatabase.collection("SpinAwards").doc("三獎").update({
+					rate: award_3_rate_after_count,
+					weight: award_3_rate_weight_update
+				})
+				MyDatabase.collection("SpinAwards").doc("四獎").update({
+					rate: award_4_rate_after_count,
+					weight: award_4_rate_weight_update
+				})
+				MyDatabase.collection("SpinAwards").doc("五獎").update({
+					rate: award_5_rate_after_count,
+					weight: award_5_rate_weight_update
+				})
+				MyDatabase.collection("SpinAwards").doc("銘謝惠顧").update({
+					rate: award_6_rate_after_count,
+					weight: award_6_rate_weight_update
+				})
+			}
+		</script>		
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -153,22 +280,22 @@
 								<h2 class="major">獎項庫存管理</h2>
 								<!--<span class="image main"><img src="images/pic01.jpg" alt="" /></span>-->
 								<h2>獎項一</h2>
-								<p id="award_1_name"></p>
+								<p id="award_1_storage_name"></p>
 								<p><input type="text" id="award_1_storage_inputbox" size="10" inputmode="numeric"></p>
 								<h2>獎項二</h2>
-								<p id="award_2_name"></p>
+								<p id="award_2_storage_name"></p>
 								<p><input type="text" id="award_2_storage_inputbox" size="10" inputmode="numeric"></p>
 								<h2>獎項三</h2>
-								<p id="award_3_name"></p>
+								<p id="award_3_storage_name"></p>
 								<p><input type="text" id="award_3_storage_inputbox" size="10" inputmode="numeric"></p>
 								<h2>獎項四</h2>
-								<p id="award_4_name"></p>
+								<p id="award_4_storage_name"></p>
 								<p><input type="text" id="award_4_storage_inputbox" size="10" inputmode="numeric"></p>
 								<h2>獎項五</h2>
-								<p id="award_5_name"></p>
+								<p id="award_5_storage_name"></p>
 								<p><input type="text" id="award_5_storage_inputbox" size="10" inputmode="numeric"></p>
 								<h2>獎項六</h2>
-								<p id="award_6_name"></p>
+								<p id="award_6_storage_name"></p>
 								<p><input type="text" id="award_6_storage_inputbox" size="10" inputmode="numeric"></p>
 								<p><input type="button" value="Update" onclick="UpdateStorage()"></p>
 							</article>
@@ -176,9 +303,89 @@
 						<!-- rate -->
 							<article id="rate">
 								<h2 class="major">獎項機率管理</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+								<!--<span class="image main"><img src="images/pic02.jpg" alt="" /></span>-->
+								<table>
+									<thead>
+										<tr>
+											<th colspan="2">當前設定機率</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>獎項一</td>
+											<td id="award_1_rate_name"></td>
+											<td id="award_1_rate"></td>
+										</tr>
+										<tr>
+											<td>獎項二</td>
+											<td id="award_2_rate_name"></td>
+											<td id="award_2_rate"></td>
+										</tr>
+										<tr>
+											<td>獎項三</td>
+											<td id="award_3_rate_name"></td>
+											<td id="award_3_rate"></td>
+										</tr>
+										<tr>
+											<td>獎項四</td>
+											<td id="award_4_rate_name"></td>
+											<td id="award_4_rate"></td>
+										</tr>
+										<tr>
+											<td>獎項五</td>
+											<td id="award_5_rate_name"></td>
+											<td id="award_5_rate"></td>
+										</tr>
+										<tr>
+											<td>獎項六</td>
+											<td id="award_6_rate_name"></td>
+											<td id="award_6_rate"></td>
+										</tr>
+									</tbody>
+								</table>
+								<h2>機率比重設定</h2>
+								<table>
+									<thead>
+										<tr>
+											<th colspan="0">獎項</th>
+											<th colspan="0">比重</th>
+											<th colspan="0">試算機率</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>獎項一</td>
+											<td><input type="text" id="award_1_rate_inputbox" min="0" inputmode="numeric" size="2" onchange="CountRate()"></td>
+											<td id="award_1_rate_count"></td>
+										</tr>
+										<tr>
+											<td>獎項二</td>
+											<td><input type="text" id="award_2_rate_inputbox" min="0" inputmode="numeric" size="2" onchange="CountRate()"></td>
+											<td id="award_2_rate_count"></td>
+										</tr>
+										<tr>
+											<td>獎項三</td>
+											<td><input type="text" id="award_3_rate_inputbox" min="0" inputmode="numeric" size="2" onchange="CountRate()"></td>
+											<td id="award_3_rate_count"></td>
+										</tr>
+										<tr>
+											<td>獎項四</td>
+											<td><input type="text" id="award_4_rate_inputbox" min="0" inputmode="numeric" size="2" onchange="CountRate()"></td>
+											<td id="award_4_rate_count"></td>
+										</tr>
+										<tr>
+											<td>獎項五</td>
+											<td><input type="text" id="award_5_rate_inputbox" min="0" inputmode="numeric" size="2" onchange="CountRate()"></td>
+											<td id="award_5_rate_count"></td>
+										</tr>
+										<tr>
+											<td>獎項六</td>
+											<td><input type="text" id="award_6_rate_inputbox" min="0" inputmode="numeric" size="2" onchange="CountRate()"></td>
+											<td id="award_6_rate_count"></td>
+										</tr>
+									</tbody>
+								</table>								
+								<p><input type="button" value="Update" onclick="UpdateRate()"></p>	
 							</article>
 					</div>
 
